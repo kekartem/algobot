@@ -4,7 +4,7 @@ from aiogram import Bot
 import os
 import sqlite3
 
-TOKEN = '6159575183:AAHyCC2-yaYIi8ykUBhKLe1xw-7Md2QZoEk'
+TOKEN = '5119766753:AAENiaiH_ASu8Q-wqcyv6jIiK0vb7Tz65iM'
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
