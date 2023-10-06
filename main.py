@@ -150,10 +150,10 @@ async def god_action(message: types.Message, state: FSMContext):
 
 async def remove_manager(message: types.Message):
     god = await read_god_by_id(str(message.chat.id))
-    if god is not None:
+    if god.id != -1:
         manager_chat_id = message.text.split(' ')[1].strip()
         manager = await read_manager_by_id(manager_chat_id)
-        if manager is not None:
+        if manager.id != -1:
             await remove_manager(manager_chat_id)
             await message.answer('Менеджер удалён.')
         else:
@@ -164,7 +164,7 @@ async def client_manager(message: types.Message, state: FSMContext):
     password = message.text.split(' ')[1]
     if client_manager_password == password.strip():
         manager = await read_manager_by_id(str(message.chat.id))
-        if manager is None:
+        if manager.id == -1:
             await save_manager(str(message.chat.id), str(message.from_user.username))
             await message.answer('Добро пожаловать! В этот чат будут приходить уведомления о новых заявках.')
         else:
