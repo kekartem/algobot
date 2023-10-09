@@ -25,14 +25,14 @@ async def start(message: types.Message):
     print(god)
     if god.id == -1:
         await message.answer(
-            'Привет! Я бот Алгоритмики, и я помогу вам оставить заявку в нашу школу. Давайте знакомиться. \nКак вас зовут?')
+            'Алгоритмика на связи! Чтобы записать вашего ребенка на бесплатный курс, ответьте на 3 вопроса. Это займет не больше 1 минуты.\nКак вас зовут?')
         await HandleClient.waiting_for_name.set()
 
 
 async def name(message: types.Message, state: FSMContext):
     name = (message.text[0].upper() + message.text[1:].lower()).strip()
     await state.update_data(name=name)
-    await message.answer('Очень приятно! Осталось пару шагов  Напишите номер телефона для связи.')
+    await message.answer('Отправьте ваш номер телефона.')
     await HandleClient.next()
 
 
@@ -43,8 +43,7 @@ async def number(message: types.Message, state: FSMContext):
         return
 
     await state.update_data(number=number)
-    await message.answer(
-        'И имейл.Он понадобится нам, чтобы отправить информацию по обучению. Обещаем не спамить без разрешения)')
+    await message.answer('Отправьте ваш email.')
     await HandleClient.next()
 
 
@@ -55,8 +54,7 @@ async def email(message: types.Message, state: FSMContext):
         return
     await state.update_data(email=email)
     await message.answer(
-        'Готово! Спасибо, что оставили заявку в Алгоритмику. Мы свяжемся с вами в рабочее время, чтобы рассказать '
-        'подробности участия и ответить на ваши вопросы. ☎️ Звонок поступит с номера +7 953 997 92 76.')
+        'Спасибо за оставление заявки! Мы свяжемся с вами в рабочее время, чтобы подобрать удобную группу для вашего ребенка и ответить на вопросы.\nЗвонок поступит с номера +7 (958) 697-43-63.')
     result_managers = await read_all_managers()
     user_data = await state.get_data()
     await state.finish()
